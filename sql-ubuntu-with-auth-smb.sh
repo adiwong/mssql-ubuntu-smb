@@ -56,9 +56,9 @@ fi
 if [ -z "$(grep $smbPath\ $mntPath /etc/fstab)" ]; then
   mssqlid=`cat /etc/passwd | grep mssql | awk -F: '{print $3}'`
   mssqlgroupid=`cat /etc/passwd | grep mssql | awk -F: '{print $4}'`  
-  echo "$smbPath $mntPath cifs nofail,vers=3.0,credentials=$smbCredentialFile,serverino,uid=$mssqlid,gid=$mssqlgroupid,dir_mode=0750,file_mode=0700" | sudo tee -a /etc/fstab > /dev/null
+  sudo echo "$smbPath $mntPath cifs nofail,vers=3.0,credentials=$smbCredentialFile,serverino,uid=$mssqlid,gid=$mssqlgroupid,dir_mode=0750,file_mode=0700" | sudo tee -a /etc/fstab > /dev/null
 else
-    echo "/etc/fstab was not modified to avoid conflicting entries as this Azure file share was already present. You may want to double check /etc/fstab to ensure the configuration is as desired."
+   sudo echo "/etc/fstab was not modified to avoid conflicting entries as this Azure file share was already present. You may want to double check /etc/fstab to ensure the configuration is as desired."
 fi
 
 # Mount Shared Drive
