@@ -51,8 +51,10 @@ else
     echo "The credential file $smbCredentialFile already exists, and was not modified."
 fi
 
-# Create /etc/fstab
+# Create Path to be mounted
+sudo mkdir -p $mntPath
 
+# Create /etc/fstab
 if [ -z "$(grep $smbPath\ $mntPath /etc/fstab)" ]; then
   mssqlid=`cat /etc/passwd | grep mssql | awk -F: '{print $3}'`
   mssqlgroupid=`cat /etc/passwd | grep mssql | awk -F: '{print $4}'`  
